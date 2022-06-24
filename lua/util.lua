@@ -120,9 +120,6 @@ function util.upstreamUpdate(useSudo)
   end
   local cmd = "git fetch origin " .. branch
   print("cmd is " .. cmd)
-  if useSudo then
-    cmd = "sudo " .. cmd
-  end
   if os.execute(cmd) then
     local headHash, success_1 = util.shell("git rev-parse HEAD")
     if not success_1 then
@@ -145,26 +142,15 @@ function util.syncToUpstream(useSudo, cleanFunc)
     file.write(OTA_STATUS_FILE, os.date(), "w")
     cleanFunc()
     util.runAllcmd({
-        "sudo git stash",
-        "sudo git merge '@{u}'",
-        "sudo chmod +x hummingbird_iot.sh"
+        "git stash",
+        "git merge '@{u}'",
+        "chmod +x hummingbird_iot.sh"
       })
     file.remove(OTA_STATUS_FILE)
-    if not os.execute("sudo ./hummingbird_iot.sh lua") then print("Fail to start hiot") end
+    if not os.execute("lua5.3 ./init.lua") then print("Fail to start hiot") end
     os.exit(0)
   end
   return true
-end
-
-function util.FreeDiskPressure(usage)
-  local thresh = usage or 80
-  print("In FreeDiskPressure")
-  local diskUsage, success = util.shell("df -h |grep '/dev/root' | awk '{print $5}' | tr -dc '0-9'")
-  if not success then print("Fail to get diskUsage") return false end
-  if tonumber(diskUsage) > thresh then
-    print("trim miner for " .. diskUsage .. " hight then " .. tostring(thresh))
-    os.execute('sudo bash ./trim_miner.sh createSnap')
-  end
 end
 
 return util
