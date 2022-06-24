@@ -1,0 +1,37 @@
+{
+    "Lua.diagnostics.globals": [
+        "vim",
+        "describe",
+        "it",
+        "before_each",
+        "after_each",
+        "setup",
+        "teardown",
+        "g_hiot_config"
+    ],
+    "diagnostics": {
+        "enable": true,
+        "globals": [
+            "vim",
+            "describe",
+            "it",
+            "before_each",
+            "after_each",
+            "setup",
+            "teardown"
+        ]
+    },
+    "runtime": {
+        "version": "Lua 5.4"
+    },
+    "workspace": {
+        "ignoreDir": [
+            "node_modules/"
+        ],
+        "library": {
+            "./": true,
+            "./lua": true
+        },
+        "maxPreload": 1600
+    }
+}
