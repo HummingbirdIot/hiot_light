@@ -36,7 +36,7 @@ local function PatchTargetFile(Src, Dest)
   if file.exists(Src) then
     print(cmd)
     if not os.execute(cmd) then
-      return os.execute("sudo cp " .. Src .. " " .. Dest)
+      return os.execute("cp " .. Src .. " " .. Dest)
     end
   else
     print("!!! error:" .. Src .. " or " .. Dest .. "Not Exist just ingore")

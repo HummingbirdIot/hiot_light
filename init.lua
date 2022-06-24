@@ -1,3 +1,3 @@
-local hiot = require('./lua/hummingbird_iot.lua')
+local hiot = require('./lua/hummingbird_iot')
 
 hiot.Run();

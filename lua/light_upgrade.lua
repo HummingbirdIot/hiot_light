@@ -44,7 +44,7 @@ local function UpgradeAndInstall(version, fileName)
     end
   end
   local tmpFile = "/tmp/light_gw" .. os.date("!%H%M%S") .. ".deb"
-  local cmd = "wget -O " .. tmpFile .. " " .. url .. " && sudo dpkg -i " .. tmpFile
+  local cmd = "wget -O " .. tmpFile .. " " .. url .. " && opkg install " .. tmpFile
   print(cmd)
   if not os.execute(cmd) then
     print("Fail to download deb and install")
