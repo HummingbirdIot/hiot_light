@@ -64,7 +64,6 @@ function hiot.Run()
   hiot.RuntimeConfig = util.loadFileToTable("/etc/hummingbird_iot.config")
 
   print(GetCurrentLuaFile())
-  hiot.CleanSaveSnapshot()
   util.tryWaitNetwork()
   util.patchGit()
   util.gitSetup()
