@@ -1,7 +1,7 @@
-local hiot = { RuntimeConfig = {} }
+local hiot = {RuntimeConfig = {}}
 
-local file = require("lua/file")
-local util = require("lua/util")
+local file = require("file")
+local util = require("util")
 
 local undefined_region = "undefined"
 
@@ -67,15 +67,18 @@ function hiot.Run()
   util.tryWaitNetwork()
   util.patchGit()
   util.gitSetup()
-  local light = require("lua/light")
-  util.syncToUpstream(true, function ()
-    light.Stop()
-  end)
+  local light = require("light")
+  util.syncToUpstream(
+    false,
+    function()
+      light.Stop()
+    end
+  )
   light.Start()
 end
 
-if arg[1] == "run" then
-  hiot.Run()
-else
+if ... then
   return hiot
+else
+  hiot.Run()
 end

@@ -1,8 +1,8 @@
 local light_upgrade = {}
 
-local file = require("lua/file")
-local util = require("lua/util")
-local json = require("lua/json")
+local file = require("file")
+local util = require("util")
+local json = require("json")
 
 local function GetCurrentVersion()
   local info, success = util.shell("helium_gateway -V | cut -d ' ' -f 2")

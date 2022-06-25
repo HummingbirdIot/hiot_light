@@ -13,7 +13,7 @@ local util = {}
 --  requireRel = require
 --end
 
-local file = require("lua/file")
+local file = require("file")
 
 assert(file.exists)
 
@@ -118,6 +118,7 @@ function util.upstreamUpdate(useSudo)
   if not success then
     return false
   end
+  if useSudo then print("No need sudo for openwrt") end
   local cmd = "git fetch origin " .. branch
   print("cmd is " .. cmd)
   if os.execute(cmd) then
@@ -136,6 +137,7 @@ function util.upstreamUpdate(useSudo)
   end
 end
 
+local launch_cmd = "lua5.3 ./init.lua"
 function util.syncToUpstream(useSudo, cleanFunc)
   if util.upstreamUpdate(useSudo) and not file.exists(OTA_STATUS_FILE) then
     print("Do self update")
@@ -143,11 +145,10 @@ function util.syncToUpstream(useSudo, cleanFunc)
     cleanFunc()
     util.runAllcmd({
         "git stash",
-        "git merge '@{u}'",
-        "chmod +x hummingbird_iot.sh"
+        "git merge '@{u}'"
       })
     file.remove(OTA_STATUS_FILE)
-    if not os.execute("lua5.3 ./init.lua") then print("Fail to start hiot") end
+    if not os.execute(launch_cmd) then print("Fail to start hiot") end
     os.exit(0)
   end
   return true
