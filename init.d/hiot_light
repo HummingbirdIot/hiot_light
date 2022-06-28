@@ -5,7 +5,7 @@ START=99
 STOP=99
 USE_PROCD=1
 
-PROG="/root/hnt_iot/start.sh"
+PROG="/root/hnt_iot/script/start.sh"
 
 start_service() {
     procd_open_instance
