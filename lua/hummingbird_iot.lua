@@ -18,10 +18,6 @@ function hiot.GetDefaultLoraRegion()
   return hiot.loraRegions.region_cn470.name
 end
 
-local function Sleep(n)
-  os.execute("sleep " .. tonumber(n))
-end
-
 local function GetCurrentLuaFile()
   local source = debug.getinfo(2, "S").source
   if source:sub(1, 1) == "@" then

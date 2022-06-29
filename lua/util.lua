@@ -113,6 +113,10 @@ function util.gitSetup()
   return util.runAllcmd(cmds)
 end
 
+function util.sleep(n)
+  os.execute("sleep " .. tonumber(n))
+end
+
 function util.upstreamUpdate(useSudo)
   local branch, success = util.shell("git rev-parse --abbrev-ref HEAD")
   if not success then
