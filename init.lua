@@ -7,8 +7,6 @@ end
 local file = require("file")
 local util = require("util")
 
-local pidFile = "/tmp/hiot_light.run"
-
 local hiot = require('hummingbird_iot')
 if arg[1] ~= nil and arg[1] == "timer" then
   math.randomseed(os.time())
@@ -19,8 +17,4 @@ if arg[1] ~= nil and arg[1] == "timer" then
   util.sleep(t)
 end
 
-if file.exists(pidFile) then print("hiot_light is running just exit") end
-file.write(pidFile, "running")
-
 hiot.Run()
-file.remove(pidFile)
