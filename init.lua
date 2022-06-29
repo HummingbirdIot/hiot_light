@@ -14,6 +14,8 @@ if arg[1] ~= nil and arg[1] == "timer" then
   math.randomseed(os.time())
   local t = math.random(1,500)
   print("hiot timer trigger " .. tostring(t))
+  local dateStr = os.date("%m/%d/%Y %I:%M %p");
+  file.write("/tmp/hiot_light.log", dateStr);
   util.sleep(t)
 end
 
