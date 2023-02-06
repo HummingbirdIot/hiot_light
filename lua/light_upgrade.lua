@@ -19,7 +19,7 @@ end
 
 local ReleaseTable = {
   aarch64 = "raspi_64.deb",
-  mips = "caldigit.ipk",
+  mips = "clodpi.ipk",
   arm64 = "raspi_64.deb" -- for test
 }
 
